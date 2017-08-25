@@ -11,4 +11,5 @@ function elixir_install() {
   cd /usr/src/elixir
   make clean test install
   elixir -v
+  mix local.hex --force
 }
