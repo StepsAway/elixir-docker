@@ -1,0 +1,14 @@
+function elixir_install() {
+  apt-get update
+  $minimal_apt_get_install $packages
+  rm -rf /var/lib/apt/lists/*
+  ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz"
+	curl -fSL -o elixir.tar.gz $ELIXIR_DOWNLOAD_URL
+	echo "$ELIXIR_DOWNLOAD_SHA256 elixir.tar.gz" | sha256sum -c -
+  mkdir -p /usr/src/elixir
+  tar -zxf elixir.tar.gz -C /usr/src/elixir --strip-components=1
+  rm -rf elixir.tar.gz
+  cd /usr/src/elixir
+  make clean test install
+  elixir -v
+}
