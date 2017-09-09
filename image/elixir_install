@@ -12,4 +12,5 @@ function elixir_install() {
   make clean test install
   elixir -v
   mix local.hex --force
+  mix local.rebar --force
 }
